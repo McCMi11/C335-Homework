@@ -12,10 +12,9 @@
  *   Modified By: Michael McCann
  *
  *   Revision Description:  Fixed small bugs
- *      - divide by 0
- *      - stack not being fully cleared
- *      - crash when try to clear twice in a row
- *      - if stack is empty pull now returns 0 instead of null
+ *      - added more comments for easier understanding
+ *      - stack must now have at least two items to use binary operators
+ *      - added print statements when clearing and quitting
  */
 
 #include <stdio.h>
@@ -43,6 +42,7 @@ static LIST stack;
  *
  */
 void clear(){
+  printf("Clearing Stack...\n");
   LIST c = (LIST) malloc(sizeof(struct CELL));// allows saving a temp stack
   while(stack){// will keep looping while stack isnt empty
     c = stack->next;// sets the temp stack to the next in the stack
@@ -161,26 +161,66 @@ int main(){
 	}
       }
       switch((int) str[i]){// checks char for specified operators and special letters.
-      case '+': numTwo = pull();
-	num = pull();
-	push(num + numTwo);
-	break;
-      case '-': numTwo = pull();
-	num = pull();
-	push(num - numTwo);
-	break;
-      case '*':numTwo = pull();
-	num = pull();
-	push(num * numTwo);
-	break;
-      case '/':numTwo = pull();
-	num = pull();
-	//used to avoid divide by 0
-	if(!numTwo){// checks if second number, first pulled is 0.
-	  printf("ERR divide by 0, not changing stack\n");
+      case '+': 
+	if(stack){// checks if there is an element in the stack
+	  numTwo = pull();// takes the element from the stack
+	  if(stack){// checks if there is another element in the stack
+	    num = pull();// takes the element from the stack
+	    push(num + numTwo);
+	  }else{
+	    push(numTwo);// adds numTwo back to the stack
+	    printf("Stack only had one element, aborting...\n");
+	  }
 	}else{
-	  push(num / numTwo);
+	  printf("Stack empty, aborting...\n");
 	}
+	break;
+      case '-': 
+	if(stack){// checks if there is at least one element in the stack
+          numTwo = pull();// takes the element from the stack
+          if(stack){// checks if there is another element in the stack
+            num = pull();// takes the element from the stack
+            push(num - numTwo);
+          }else{
+	    push(numTwo);// adds numTwo back to the stack
+            printf("Stack only had one element, aborting...\n");
+          }
+        }else{
+          printf("Stack empty, aborting...\n");
+        }
+	break;
+      case '*':
+	if(stack){// checks if there is at least one element in the stack
+          numTwo = pull();// takes the element in the stack
+          if(stack){// checks if there is another element in the stack
+            num = pull();// takes the element in the stack
+            push(num * numTwo);
+          }else{
+            printf("Stack only had one element, aborting...\n");
+          }
+        }else{
+	  push(numTwo);// adds numTwo back to the stack
+          printf("Stack empty, aborting...\n");
+        }
+	break;
+      case '/':
+	if(stack){// checks if there is at least one element in the stack
+          numTwo = pull();// takes the element
+          if(stack){// checks if there is another
+            num = pull();// takes the element
+            //used to avoid divide by 0
+	    if(!numTwo){// checks if second number, first pulled is 0.
+	      printf("ERR divide by 0, not changing stack\n");
+	    }else{
+	      push(num / numTwo);
+	    }
+          }else{
+	    push(numTwo);// adds numTwo back to the stack
+            printf("Stack only had one element, aborting...\n");
+          }
+        }else{
+          printf("Stack empty, aborting...\n");
+        }
 	break;
       case 'p':
 	if(!stack){// checks if stack is empty, null
@@ -194,7 +234,9 @@ int main(){
 	break;
       case 'c':clear(); // clears the stack
       	break;
-      case 'q': quit = 0;
+      case 'q': 
+	printf("Quitting...\n");
+	quit = 0;
 	clear();
 	break;// quits the program
       }
