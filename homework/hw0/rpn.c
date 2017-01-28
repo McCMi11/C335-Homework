@@ -12,9 +12,8 @@
  *   Modified By: Michael McCann
  *
  *   Revision Description:  Fixed small bugs
- *      - added more comments for easier understanding
- *      - stack must now have at least two items to use binary operators
- *      - added print statements when clearing and quitting
+ *      - added EOF detection.
+ *      - if EOF detected it acts like quit
  */
 
 #include <stdio.h>
@@ -151,7 +150,13 @@ int main(){
   int numTwo;// used when pulling from the stack
   int quit = 1;// used to stop the loop
   while(quit){
-    scanf("%99s",&str);//allows user input, limits to 99 chars
+    quit = scanf("%99s",&str);//allows user input, limits to 99 chars
+    if(quit == EOF){
+      printf("EOF detected...\n");
+      printf("Quitting...\n");
+      clear();
+      return 0;
+    }
     while(str[i]){// goes until null character is found
       if(isdigit(str[i])){//checks if it is a digit.
 	num = atoi(&str[i]);//used to extract the number
