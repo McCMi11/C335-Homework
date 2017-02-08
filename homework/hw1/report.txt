@@ -1,0 +1,10 @@
+address of state: 0x00012fe8 
+size of state: 0x00000004 bytes
+address of state_counter: 0x00012fec
+size of state_counter: 0x00000004 bytes
+starting address of stop_light: 0x00008af8
+size of stop_light: 0x00000090 bytes
+starting address of inc: 0x00008ba0
+size of inc: 0 bytes
+largest function in executable HW1.elf: _malloc_r
+Overall size of HW1.elf: 0x3024 bytes

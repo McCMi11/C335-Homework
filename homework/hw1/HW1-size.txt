@@ -1,0 +1,2 @@
+   text	   data	    bss	    dec	    hex	filename
+   9652	   2404	    268	  12324	   3024	HW1.elf
