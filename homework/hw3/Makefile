@@ -1,9 +1,10 @@
 main: prog
 
 prog: hw3.o
-	gcc hw3.o -o disassembler
+
 hw3.o: hw3.c
 	gcc -c hw3.c
+	gcc hw3.o -o disassembler
 
 test: main
 	arm-none-eabi-as test_case_file -o test.o
