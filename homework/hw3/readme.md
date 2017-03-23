@@ -13,3 +13,10 @@
 2. $make
 3. $./disassembler < name.txt
 4. *Results will be printed to the terminal  
+
+###Input as running and save to file  
+1. $make
+2. $./disassembler > name.txt
+3. *Inupt any hex codes, of length 4
+4. *Can be separated by any whitespace, space, tab, return, ...
+5. *To end press any invalid key and press return or use the EOF escape key.
