@@ -131,7 +131,7 @@ int main() {
 	      // multiply
 	      rm = (inst >> 3) & 0b111;
 	      rn = inst & 0b111;
-	      printf("\tmuls r%d, r%d\n", rn, rm);
+	      printf("\tmuls r%d, r%d, r%d\n", rn, rm, rn);
 	    }// end fourth bit 1
 	    // fourth bit 0
 	    else{
