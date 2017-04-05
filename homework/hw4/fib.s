@@ -21,15 +21,20 @@ fib:
 	movs r5, #1
 	movs r7, #0
 	// subtract 2 from num
-	.ELSE:
+.ELSE:
+	// adds prev1 and prev2, stores in val
 	adds r7, r5, r6
+	// moves prev1 to prev2
 	movs r6, r5
+	// moves val to prev1
 	movs r5, r7
+	// subtract 1 from num fib left
 	subs r0, #1
+	// if r0 = 1, fib is done
 	cmp r0, #1
 	beq .END
 	bal .ELSE
-	.END:
+.END:
 	movs r0, r7
 	// end my code
 	pop {r4-r7}
